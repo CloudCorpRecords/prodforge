@@ -1,0 +1,20 @@
+{
+  "name": "taskboard",
+  "version": "0.1.0",
+  "description": "Worked SaaS example: a task board API (GET /health, GET /tasks, POST /tasks) on the generated saas-web skeleton, node builtins only.",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "test": "tsx --test test/*.test.ts",
+    "start": "tsx src/index.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "tsx": "^4",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}

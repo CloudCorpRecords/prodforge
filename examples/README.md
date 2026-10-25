@@ -1,3 +1,10 @@
+# Worked examples (Wave C)
+
+Two real products built end to end from `prodforge init` scaffolds — each with its own source, tests, and README, and each verified by ProdForge's own test suite (`test/examples.test.ts` runs both example suites plus a `tsc --noEmit` build check):
+
+- **taskboard/** — a SaaS: `prodforge init saas-web taskboard` extended with an in-memory task board API (`GET /health`, `GET /tasks`, `POST /tasks`). Node builtins only.
+- **notes/** — an MCP server: `prodforge init mcp-server notes` extended with `ping` plus an in-memory notes store (`add_note`, `list_notes`, `get_note`). CLI + MCP in one bin.
+
 # Example: Ship a SaaS in an afternoon
 
 1. Start from stacks/saas-web

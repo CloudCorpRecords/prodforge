@@ -1,0 +1,11 @@
+{
+  "name": "io.github.example/notes",
+  "version": "0.1.0",
+  "description": "An MCP server: CLI + MCP in one bin, following the ProdForge fleet factory pattern.",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "notes"
+    }
+  ]
+}

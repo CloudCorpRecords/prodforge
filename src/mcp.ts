@@ -5,7 +5,7 @@ import { loadCatalog, byPhase, mcpConfigFor, validateCatalog } from "./catalog.j
 import { doctor, productionChecklist } from "./doctor.js";
 
 export async function runMcp(): Promise<void> {
-  const server = new McpServer({ name: "prodforge", version: "0.3.0" });
+  const server = new McpServer({ name: "prodforge", version: "0.4.0" });
 
   server.tool("list_packages", "List every package ProdForge can wire together, optionally by production phase.", {
     phase: z.enum(["build", "secure", "test", "release", "operate"]).optional(),

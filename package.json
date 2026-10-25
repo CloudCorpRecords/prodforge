@@ -21,7 +21,8 @@
     "catalog",
     "mcp",
     "stacks",
-    "playbooks"
+    "playbooks",
+    "examples"
   ],
   "homepage": "https://github.com/CloudCorpRecords/prodforge#readme",
   "license": "MIT",
@@ -40,5 +41,5 @@
     "test": "tsx --test test/*.test.ts"
   },
   "type": "module",
-  "version": "0.3.0"
+  "version": "0.4.0"
 }

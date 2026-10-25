@@ -1,0 +1,27 @@
+{
+  "name": "notes",
+  "version": "0.1.0",
+  "description": "Worked MCP server example: ping plus an in-memory notes store (add_note, list_notes, get_note), CLI + MCP in one bin.",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "test": "tsx --test test/*.test.ts",
+    "start": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1",
+    "zod": "^3"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "tsx": "^4",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT",
+  "bin": {
+    "notes": "dist/index.js"
+  }
+}
