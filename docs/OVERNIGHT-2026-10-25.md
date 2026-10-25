@@ -1,0 +1,24 @@
+# Overnight Build Log - 2026-10-25
+
+Directive (Rene, 2026-10-25 00:18 PT): a new repo that can be updated all night till 8am, that helps connect and build products into production without the hassle of figuring it all out by connecting MCP / packages / and more stuff together, in a massive repo.
+
+## Plan for the night (00:18 - 08:00 PT)
+
+- Hour 0: Scaffold v0.1.0 - catalog, connect, doctor, checklist, ship gate, CLI + MCP, tests, stacks, playbooks. Push to GitHub.
+- Hourly waves after that, each wave: one real improvement, tests green, commit, push. No wave ships red.
+  - Wave A: init scaffolds for the 5 stacks
+  - Wave B: ship gate executes tools
+  - Wave C: examples (a worked SaaS and a worked MCP server, end to end)
+  - Wave D: docs deepening + catalog expansion toward 40 tools
+  - Wave E: production score
+  - Wave F: final hardening, shipcheck run, morning report
+- 08:00 PT: Morning report to Rene in chat: what shipped, what is live where, what is left.
+
+## Log
+
+- 00:18 PT: Directive received. Name picked: ProdForge (checked: no existing CloudCorpRecords/prodforge, shipstack, or prodstack).
+- 00:2x PT: v0.1.0 scaffold built locally, fleet factory pattern (TS, Node 20+, MCP SDK, server.json, Dockerfile with registry label).
+- 01:35 PT (Wave A): `prodforge init <stack> <name>` shipped locally as v0.2.0 — real generated files for all 5 stacks (package.json, tsconfig, README, src, node:test suite; mcp-server also gets server.json), zero runtime deps beyond node builtins, init refuses to clobber a non-empty dir. Build + tests 10/10 green, including a generated-project suite that actually runs. CLI smoke-tested: `init cli-tool` generates a project whose own tests pass standalone.
+- 01:35 PT (Wave A push status): GitHub API upstream via gh-proxy timing out at run time (proxy process alive, _status ok, but slow_upstream_count 100 and api.github.com calls timing out at 30-45s, including direct unauthenticated curl). Wave A commit NOT yet pushed at log time; push retried via the PAT Git Data API path once the proxy/upstream recovers — no push claimed until the new head SHA is re-read via the API.
+- ~02:15 PT (Wave A push FINAL for this run): BLOCKED, not pushed. Three head-read push attempts and one blob-write attempt all died on proxy 502s. Diagnosed: the supervisor's health probe treats any HTTP response (incl. 502) as healthy (no -f flag), so it never restarts on this failure mode; manual proxy restart (old pid 22873 -> new pid 24934, setsid-detached) restored /rate_limit once, but the fresh proxy re-saturated within minutes under other jobs' load (slow_upstream_count 46+ in ~3 min) and repo reads/writes kept 502ing. Remote head RE-VERIFIED via direct unauthenticated api.github.com (200, twice, same SHA): bbdc40ea4c670e583000b039a317e55722a751e9, v0.1.0, tree 754671d88c3bff6017b5b3f78ee665bacce9e372 — NO divergence, local tree is v0.1.0 + Wave A only. Push scripts ready: ~/workspace/github-builds/prodforge-push-waveA4.py (head/tree pre-verified) — NEXT RUN MUST RE-VERIFY the head before using it; if the head moved, use the head-first script prodforge-push-waveA.py instead. Nothing pushed, nothing claimed.
+- ~02:55 PT (Wave B): `prodforge ship` now EXECUTES the gate (v0.3.0) — new src/ship.ts, 20 gates (one per checklist item), each running its fleet tool's own documented read-only cwd invocation where one is known (agentsfile check ., envdoc check ., mcpvet vet ., actionpin audit ., flowcheck audit ., depguard check .; shipcheck check <owner/repo> from the git remote). Statuses PASS/FAIL/ABSENT/NOT-WIRED; verdict NO-GO / NOT-READY / PARTIAL / GO, GO only when every gate passes; CLI exits 0 only on GO; --dry-run and --json supported; new `ship_gate` MCP tool. Build + tests 19/19 green. Real CLI run in this sandbox: 0 PASS / 0 FAIL / 6 ABSENT / 14 NOT-WIRED, verdict NOT-READY, exit 1 — no faked PASS. MCP handshake smoke-tested (initialize + tools/list, ship_gate listed, server version 0.3.0). Remote head RE-VERIFIED again via direct api.github.com (200): bbdc40ea4c670e583000b039a317e55722a751e9, v0.1.0 — still no divergence; local tree is v0.1.0 + Wave A + Wave B. Push: one combined A+B commit via ~/workspace/github-builds/prodforge-push-waveAB.py (head-first, same PAT Git Data API pattern); push status below.

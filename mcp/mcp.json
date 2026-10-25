@@ -1,0 +1,204 @@
+{
+  "mcpServers": {
+    "greenlight": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@reneturcios/greenlight",
+        "mcp"
+      ]
+    },
+    "prwatch": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@reneturcios/prwatch",
+        "mcp"
+      ]
+    },
+    "claimcheck": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@reneturcios/claimcheck",
+        "mcp"
+      ]
+    },
+    "gatefile": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@reneturcios/gatefile",
+        "mcp"
+      ]
+    },
+    "shipcheck": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@reneturcios/shipcheck",
+        "mcp"
+      ]
+    },
+    "cidiff": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@reneturcios/cidiff",
+        "mcp"
+      ]
+    },
+    "reprocheck": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@reneturcios/reprocheck",
+        "mcp"
+      ]
+    },
+    "hookcheck": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@reneturcios/hookcheck",
+        "mcp"
+      ]
+    },
+    "actionpin": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@reneturcios/actionpin",
+        "mcp"
+      ]
+    },
+    "injectcheck": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@reneturcios/injectcheck",
+        "mcp"
+      ]
+    },
+    "mcpvet": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@reneturcios/mcpvet",
+        "mcp"
+      ]
+    },
+    "depguard": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@reneturcios/depguard",
+        "mcp"
+      ]
+    },
+    "flowcheck": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@reneturcios/flowcheck",
+        "mcp"
+      ]
+    },
+    "tracewatch": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@reneturcios/tracewatch",
+        "mcp"
+      ]
+    },
+    "wallcheck": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@reneturcios/wallcheck",
+        "mcp"
+      ]
+    },
+    "mcpaudit": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@reneturcios/mcpaudit",
+        "mcp"
+      ]
+    },
+    "contextbudget": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@reneturcios/contextbudget",
+        "mcp"
+      ]
+    },
+    "agentsfile": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@reneturcios/agentsfile",
+        "mcp"
+      ]
+    },
+    "envdoc": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@reneturcios/envdoc",
+        "mcp"
+      ]
+    },
+    "npmpreflight": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@reneturcios/npmpreflight",
+        "mcp"
+      ]
+    },
+    "envdoctor": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@reneturcios/envdoctor",
+        "mcp"
+      ]
+    },
+    "logdigest": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@reneturcios/logdigest",
+        "mcp"
+      ]
+    },
+    "commitcheck": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@reneturcios/commitcheck",
+        "mcp"
+      ]
+    },
+    "inboxwatch": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@reneturcios/inboxwatch",
+        "mcp"
+      ]
+    },
+    "prodforge": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@reneturcios/prodforge",
+        "mcp"
+      ]
+    }
+  }
+}

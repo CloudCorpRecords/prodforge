@@ -1,0 +1,55 @@
+# ProdForge
+
+**Take any product to production without wiring it all yourself.**
+
+You have the product idea. Then comes the hassle nobody warns you about: which MCP servers do I need, how do I connect them, what security checks matter, how do I know a release actually shipped, what breaks in production first?
+
+ProdForge is one massive repo that already connected all of that together.
+
+One catalog. One merged MCP config. Five production stacks. One ship gate.
+
+```bash
+npx @reneturcios/prodforge list
+npx @reneturcios/prodforge connect --write mcp.json
+npx @reneturcios/prodforge doctor
+npx @reneturcios/prodforge checklist
+npx @reneturcios/prodforge ship
+npx @reneturcios/prodforge init cli-tool my-tool   # real scaffold: files + tests
+```
+
+## What is inside
+
+- **catalog/** - Every tool in the fleet in one registry: Greenlight, Shipcheck, Wallcheck, the Security Wave (hookcheck, actionpin, injectcheck, mcpvet, depguard, flowcheck, tracewatch), mcpaudit, cidiff, reprocheck, contextbudget, agentsfile, envdoc, npmpreflight, envdoctor, logdigest, and more. 26 tools, grouped by production phase: build, secure, test, release, operate.
+- **mcp/** - One merged MCP config that wires every shipped MCP server together at once, for Claude, Cursor, and VS Code. Stop copy-pasting server blocks one by one.
+- **stacks/** - Five production stacks you start from instead of a blank repo: `mcp-server`, `saas-web`, `api-service`, `cli-tool`, `ai-agent`. Each stack says exactly which tools are pre-wired, which env vars it needs, and what its release gate is. `prodforge init <stack> <name>` generates a real one: package.json, tsconfig, README, src, and a passing test suite.
+- **playbooks/** - The production playbook, the release playbook, the security playbook, and the observability playbook. Short, checkable, no fluff.
+- **CLI + MCP in one bin** - Same fleet factory pattern as Greenlight and Shipcheck: `prodforge` is a CLI for humans and an MCP server for agents. Agents get `list_packages`, `connect_config`, `production_checklist`, `doctor_report`, `catalog_health`, and `ship_gate`.
+
+## Why this exists
+
+Every tool in the catalog already shipped on its own: npm, GHCR, and the MCP Registry, with tests and real production validation. The pain was never any single tool. The pain was figuring out how they fit together while you are trying to ship a product.
+
+ProdForge is that fit, done once, in public, and kept updated.
+
+## Start here
+
+1. Run `prodforge doctor` in your project. Fix what it names.
+2. Run `prodforge connect --write mcp.json`. Your agent now has the whole fleet.
+3. Pick a stack in `stacks/` closest to your product and follow its checklist.
+4. Before you tag anything, run `prodforge ship`. It executes each installed fleet tool and reports the rest honestly: any FAIL is a NO-GO, a missing tool is ABSENT (never a PASS), and an unwired gate is NOT-WIRED. Exit 0 only on GO.
+
+## Stacks at a glance
+
+| Stack | For | Pre-wired gates |
+|---|---|---|
+| mcp-server | A new MCP server | mcpaudit, mcpvet, shipcheck, npmpreflight |
+| saas-web | A web SaaS product | wallcheck, flowcheck, envdoc, shipcheck |
+| api-service | An API or backend service | depguard, flowcheck, logdigest, shipcheck |
+| cli-tool | A CLI / dev tool | agentsfile, contextbudget, cidiff, shipcheck |
+| ai-agent | An agent product | injectcheck, tracewatch, mcpvet, contextbudget |
+
+## Status
+
+v0.3.0, built 2026-10-25 (Wave B: `ship` executes the gate — real tool runs, honest ABSENT/NOT-WIRED, never a faked PASS). Overnight build log in `docs/OVERNIGHT-2026-10-25.md`. Roadmap in `docs/ROADMAP.md` - 5x the current scope, in waves.
+
+MIT. By Rene Turcios / CloudCorpRecords. Fleet: https://github.com/CloudCorpRecords

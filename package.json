@@ -1,0 +1,44 @@
+{
+  "bin": {
+    "prodforge": "dist/cli.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1",
+    "zod": "^3"
+  },
+  "description": "Take any product to production without wiring it all yourself: ProdForge connects your MCP servers, packages, security checks, and release gates in one repo.",
+  "devDependencies": {
+    "@types/node": "^20",
+    "tsx": "^4",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "files": [
+    "dist",
+    "server.json",
+    "catalog",
+    "mcp",
+    "stacks",
+    "playbooks"
+  ],
+  "homepage": "https://github.com/CloudCorpRecords/prodforge#readme",
+  "license": "MIT",
+  "mcpName": "io.github.CloudCorpRecords/prodforge",
+  "name": "@reneturcios/prodforge",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CloudCorpRecords/prodforge.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/cli.ts",
+    "test": "tsx --test test/*.test.ts"
+  },
+  "type": "module",
+  "version": "0.3.0"
+}
