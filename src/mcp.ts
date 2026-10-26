@@ -5,10 +5,10 @@ import { loadCatalog, byPhase, mcpConfigFor, validateCatalog } from "./catalog.j
 import { doctor, productionChecklist } from "./doctor.js";
 
 export async function runMcp(): Promise<void> {
-  const server = new McpServer({ name: "prodforge", version: "0.4.0" });
+  const server = new McpServer({ name: "prodforge", version: "0.5.0" });
 
   server.tool("list_packages", "List every package ProdForge can wire together, optionally by production phase.", {
-    phase: z.enum(["build", "secure", "test", "release", "operate"]).optional(),
+    phase: z.enum(["build", "secure", "test", "release", "operate"]).optional().describe("Only list tools in this production phase; omit to list every tool."),
   }, async ({ phase }) => {
     const catalog = loadCatalog();
     const tools = phase ? byPhase(catalog, phase as never) : catalog.tools;
@@ -29,7 +29,7 @@ export async function runMcp(): Promise<void> {
   });
 
   server.tool("ship_gate", "Run the release gate: executes each installed fleet tool in the given directory, reports ABSENT when missing, never fakes a PASS.", {
-    dir: z.string().optional(),
+    dir: z.string().optional().describe("Directory to run the release gate in; defaults to the current working directory."),
   }, async ({ dir }) => {
     const { runShip } = await import("./ship.js");
     return { content: [{ type: "text", text: JSON.stringify(runShip(dir ?? process.cwd()), null, 2) }] };

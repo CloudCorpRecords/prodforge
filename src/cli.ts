@@ -3,7 +3,7 @@ import { writeFileSync } from "node:fs";
 import { loadCatalog, byPhase, mcpConfigFor, validateCatalog } from "./catalog.js";
 import { doctor, productionChecklist } from "./doctor.js";
 
-const VERSION = "0.4.0";
+const VERSION = "0.5.0";
 const args = process.argv.slice(2);
 const cmd = args[0] || "help";
 
